@@ -1,0 +1,81 @@
+:root {
+  --dark-bg: rgba(15, 15, 15, 0.95);
+  --spacing: 350px;
+
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+%background {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+canvas {
+  @extend %background;
+  z-index: 100;
+}
+
+main {
+  height: 4000px; /* TODO: arbitrary height */
+  position: absolute;
+  width: 98vw;
+  z-index: 99;
+}
+
+.background-scene-one {
+  @extend %background;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#00c5ff, #d6ffd4);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 1;
+
+  &--visible {
+    transition: opacity 1.5s ease-in-out;
+    opacity: 1;
+  }
+}
+
+.background-scene-two {
+  @extend %background;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#9900df, #31b4ff);
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+  z-index: 0;
+
+  &--visible {
+    transition: opacity 1.5s ease-in-out;
+    opacity: 1;
+  }
+}
+
+.background-scene-three {
+  @extend %background;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#94371b, #d7caa8);
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+  z-index: 0;
+
+  &--visible {
+    transition: opacity 1.5s ease-in-out;
+    opacity: 1;
+  }
+}
