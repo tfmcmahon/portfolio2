@@ -8,11 +8,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.1",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   },
   "dependencies": {
     "@types/three": "^0.139.0",
+    "debounce": "^1.2.1",
     "sass": "^1.50.0",
     "three": "^0.139.2"
   }

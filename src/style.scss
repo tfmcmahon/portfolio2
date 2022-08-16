@@ -1,9 +1,24 @@
-:root {
-  --dark-bg: rgba(15, 15, 15, 0.95);
-  --spacing: 350px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Asap:wght@400;600&display=swap");
 
-  font-family: brandon-grotesque, sans-serif;
-  font-weight: 400;
+$family-heading: "Montserrat", sans-serif;
+$family-body: "Asap", sans-serif;
+
+$weight-body: 400;
+$weight-heading-1: 800;
+$weight-heading-2: 600;
+
+$size-heading-1: 3rem;
+$size-heading-2: 1.75rem;
+$size-heading-3: 1.25rem;
+$size-body: 1.1rem;
+$size-body-large: 2rem;
+
+$color-black: #1f2021;
+$color-white: #fff;
+
+:root {
+  font-family: $family-body;
+  font-weight: $weight-body;
   font-style: normal;
 }
 
@@ -13,14 +28,14 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 0;
   background: transparent;
+  width: 0;
 }
 
 %background {
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
 }
 
 canvas {
@@ -29,53 +44,329 @@ canvas {
 }
 
 main {
-  height: 4000px; /* TODO: arbitrary height */
+  height: 100vh;
   position: absolute;
   width: 98vw;
   z-index: 99;
 }
 
+nav {
+  align-items: center;
+  position: relative;
+  border-bottom: 2px dashed $color-white;
+}
+
 .background-scene-one {
   @extend %background;
-  width: 100vw;
+  background: linear-gradient(#0170bc, #00c5ff, #d6ffd4);
   height: 100vh;
-  background: linear-gradient(#00c5ff, #d6ffd4);
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  width: 100vw;
   z-index: 1;
 
   &--visible {
-    transition: opacity 1.5s ease-in-out;
     opacity: 1;
+    transition: opacity 1.5s ease-in-out;
   }
 }
 
 .background-scene-two {
   @extend %background;
-  width: 100vw;
+  background: linear-gradient(#150631 15%, #3e3c88 60%, #537eba 90%, #96dadd);
   height: 100vh;
-  background: linear-gradient(#9900df, #31b4ff);
-  transition: opacity 1.5s ease-in-out;
   opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  width: 100vw;
   z-index: 0;
 
   &--visible {
-    transition: opacity 1.5s ease-in-out;
     opacity: 1;
+    transition: opacity 1.5s ease-in-out;
   }
 }
 
 .background-scene-three {
   @extend %background;
-  width: 100vw;
-  height: 100vh;
   background: linear-gradient(#94371b, #d7caa8);
-  transition: opacity 1.5s ease-in-out;
+  height: 100vh;
   opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  width: 100vw;
   z-index: 0;
 
   &--visible {
-    transition: opacity 1.5s ease-in-out;
     opacity: 1;
+    transition: opacity 1.5s ease-in-out;
   }
+}
+
+.heading {
+  color: #fff;
+  font-family: $family-heading;
+  margin: 0;
+
+  &__1 {
+    font-size: $size-heading-1;
+    font-weight: $weight-heading-1;
+    letter-spacing: -0.1rem;
+  }
+
+  &__2 {
+    font-size: $size-heading-2;
+    font-weight: $weight-heading-2;
+  }
+
+  &__3 {
+    font-size: $size-heading-3;
+    font-weight: $weight-heading-1;
+    letter-spacing: -0.1rem;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__left {
+    grid-column: 2 / span 7;
+    grid-row: 3 / span 7;
+  }
+
+  &__right {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 5;
+  }
+
+  &__one,
+  &__two,
+  &__three {
+    opacity: 0;
+    transform: translateX(-100px);
+    // this causes scene two and three to show up on load
+    // maybe loading screen solves
+    transition: all 0.4s ease-in-out;
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s ease-in-out 0.8s;
+    }
+  }
+
+  &__two {
+    opacity: 0;
+    &--from-one {
+      transform: translateX(100px);
+    }
+
+    &--from-three {
+      transform: translateX(-100px);
+    }
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__three {
+    opacity: 0;
+    transform: translateX(100px);
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(17, 1fr);
+  grid-template-rows: repeat(13, 1fr);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 110;
+
+  &__nav {
+    grid-template-rows: repeat(1, 1fr);
+    z-index: 150;
+    height: 7.7vh;
+  }
+
+  &__footer {
+    grid-template-rows: repeat(2, 1fr);
+    bottom: 0;
+    z-index: 150;
+    height: 15.4vh;
+    top: auto;
+  }
+}
+
+.copy {
+  //padding-top: 1rem;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  &__right {
+    justify-content: end;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paragraph {
+  font-family: $family-body;
+  font-size: $size-body;
+  font-weight: $weight-body;
+  letter-spacing: -0.025rem;
+  line-height: 1.5;
+  margin: 0;
+  word-spacing: 0.05rem;
+
+  &--large {
+    font-size: $size-body-large;
+    letter-spacing: -0.1rem;
+    width: auto;
+  }
+}
+
+.color {
+  &--black {
+    color: $color-black;
+  }
+  &--white {
+    color: $color-white;
+  }
+}
+
+.logo-image {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logo-link {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.nav-text {
+  grid-column: 3 / span 3;
+  grid-row: 1 / span 1;
+}
+.email-link {
+  justify-self: flex-end;
+  grid-column: 14 / span 3;
+  grid-row: 1 / span 2;
+  z-index: 10;
+  text-decoration: none;
+  font-size: $size-heading-3;
+
+  &__scene-one {
+    color: #d6ffd4;
+  }
+
+  &__scene-two {
+    color: #96dadd;
+  }
+
+  &__scene-three {
+    color: #d7caa8;
+  }
+}
+
+.resume-link {
+  grid-column: 2 / span 3;
+  grid-row: 1 / span 2;
+  z-index: 10;
+}
+
+.solid-white {
+  background-color: $color-white;
+  grid-column: 1 / span 17;
+  grid-row: 2 / span 1;
+  height: 100%;
+  width: 100%;
+}
+
+.spacing {
+  &__right {
+    padding-right: 0.5rem;
+  }
+  &__left {
+    padding-left: 1rem;
+  }
+  &__bottom {
+    padding-bottom: 1rem;
+  }
+  &__top {
+    &--1 {
+      padding-top: 1rem;
+    }
+    &--2 {
+      padding-top: 2rem;
+    }
+  }
+}
+
+.shredies {
+  filter: invert(100%);
+  position: absolute;
+  transform: translateY(-2rem) scale(-1);
+
+  grid-column: 1 / span 17;
+  grid-row: 1 / span 1;
+}
+
+.button {
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid $color-white;
+  color: $color-white;
+  cursor: pointer;
+  font-family: $family-heading;
+  margin: 0em;
+  padding: 0.25em 0.75em;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: $color-white;
+    mix-blend-mode: darken;
+  }
+}
+
+footer {
+  align-items: center;
+  position: relative;
+}
+
+.fat {
+  font-family: "Open Sans", sans-serif;
+}
+
+.scroll-button {
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid $color-white;
+  color: $color-white;
+  cursor: pointer;
+  font-family: $family-heading;
+  margin: 0em;
 }

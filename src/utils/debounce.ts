@@ -16,12 +16,18 @@
 // export default debounce;
 
 // leading debounce
-export const debounce = (callback: () => void, delay: number = 300) => {
+export const debounce = (
+  callback: (arg: any) => void,
+  delay: number = 300,
+  direction: 1 | -1 | 0
+) => {
   let timer: number | undefined = undefined;
 
-  return () => {
+  const later = () => {
+    console.log("debounce", timer);
     if (!timer) {
-      callback();
+      console.log("function call");
+      callback(direction);
     }
 
     clearTimeout(timer);
@@ -30,6 +36,8 @@ export const debounce = (callback: () => void, delay: number = 300) => {
       timer = undefined;
     }, delay);
   };
+
+  return later();
 };
 
 export const throttle = (callback: () => void, limit: number) => {

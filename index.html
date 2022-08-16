@@ -2,18 +2,134 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Tim McMahon's Portfolio</title>
+    <script
+      src="https://kit.fontawesome.com/a121fe4163.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <canvas id="bg"></canvas>
-    <div class="background-scene-one background-scene-one--visible"></div>
-    <div class="background-scene-two"></div>
-    <div class="background-scene-three"></div>
+    <nav class="layout layout__nav">
+      <a class="logo-link" href="index.html">
+        <img
+          class="logo-image"
+          src="./assets/images/tm-logo.svg"
+          alt="blue cube with letters T M"
+        />
+      </a>
+      <p class="nav-text paragraph paragraph--large color--white">
+        tim mcmahon
+      </p>
+    </nav>
+
     <main>
-      <!-- content goes here -->
+      <div class="layout">
+        <section class="content content__left content__one">
+          <h1 class="heading heading__1 color--white">WHAT I DO</h1>
+          <ul class="list color--white">
+            <li>
+              <p class="paragraph">
+                <b>Front-end</b> I am a TypeScript/JavaScript developer with a
+                passion for clean, efficient code. React — including hooks
+                (basic, complex, and custom) and context — is my preferred
+                front-end framework. I'm also familiar with Next.js, Gatsby.js,
+                Sass, and Redux. I am a fast learner and love trying out new
+                tech. Check out my resume at the top of the page to see all of
+                my technical skills.
+              </p>
+            </li>
+            <li>
+              <p class="paragraph">
+                <b>Atomic Design</b> I've created multiple modular front-end
+                component systems that follow atomic design principles. I have
+                experience working with multi-disciplinary teams to create,
+                maintain, and update consistent design systems. I've used tools
+                like Storybook and PatternLab to demonstrate these responsive,
+                accessible components to clients and internal teams.
+              </p>
+            </li>
+          </ul>
+          <div class="cta">
+            <button class="scroll-button">
+              <i class="fa fa-solid fa-arrow-down"></i>
+            </button>
+            <h3 class="heading heading__3 spacing__right">SCROLL DOWN</h3>
+          </div>
+        </section>
+
+        <section class="content__right content__two">
+          <h1 class="heading heading__1 color--white">WHAT I'VE MADE</h1>
+          <div class="copy color--white">
+            <p class="paragraph spacing__bottom">
+              I am a TypeScript/JavaScript developer with a passion for clean,
+              efficient code. React — including hooks (basic, complex, and
+              custom) and context — is my preferred front-end framework. I'm
+              also familiar with Next.js, Gatsby.js, Sass, and Redux. I am a
+              fast learner and love trying out new tech. Check out my resume at
+              the top of the page to see all of my technical skills.
+            </p>
+            <div class="cta cta__right spacing__top--2">
+              <a>
+                <img />
+              </a>
+              <h3 class="heading heading__3 color--white spacing__right">
+                SCROLL
+              </h3>
+              <a>
+                <img />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="content__left content__three">
+          <h1 class="heading heading__1 color--white">WHO I AM</h1>
+          <div class="copy color--white">
+            <p class="paragraph color--white spacing__bottom">
+              Hey! I'm a software engineer currently working at a technical
+              consulting firm building custom web solutions for Fortune 1000
+              clients. Since beginning my career in engineering, I've rapidly
+              increased my skills in TypeScript, React, and static site
+              generation by writing thousands of lines of production code!
+            </p>
+            <div class="cta spacing__top--2">
+              <a>
+                <img />
+              </a>
+              <h3 class="heading heading__3 color--white spacing__right">
+                SCROLL UP
+              </h3>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <canvas id="bg"></canvas>
+      <div class="background-scene-one background-scene-one--visible"></div>
+      <div class="background-scene-two"></div>
+      <div class="background-scene-three"></div>
     </main>
+    <footer class="layout layout__footer">
+      <a class="email-link color--black" href="mailto:tfmcmahon@gmail.com">
+        tfmcmahon@gmail.com
+      </a>
+      <a
+        class="resume-link"
+        href="./assets/images/TimMcMahonResume.pdf"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <button class="button heading heading__3">RESUME</button>
+      </a>
+      <img
+        class="shredies"
+        src="./assets/images/transition1.svg"
+        alt="a transitioning image"
+      />
+      <div class="solid-white"></div>
+    </footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
