@@ -12,6 +12,7 @@ import {
   officeTranslation,
   sceneScale,
   schoolTranslation,
+  verticalOffset,
 } from "./constants/scene-translations";
 
 const frustumSize = 1.5;
@@ -92,7 +93,7 @@ let officeScene: THREE.Group = new THREE.Group();
 const loader = new GLTFLoader();
 
 loader.load(
-  "../assets/models/school_01.glb",
+  "../assets/models/school_02.glb",
   (gltf) => {
     gltf.scene.traverse(function (child) {
       if ((child as THREE.Mesh).isMesh) {
@@ -111,14 +112,29 @@ loader.load(
     });
     scene.add(gltf.scene);
     schoolScene = gltf.scene;
-    schoolScene.position.x = schoolTranslation[1];
-    schoolScene.position.z = -0.3;
-    schoolScene.scale.x = sceneScale.school;
-    schoolScene.scale.y = sceneScale.school;
-    schoolScene.scale.z = sceneScale.school;
+
+    const isDesktop = window.innerWidth >= 768;
+
+    schoolScene.position.x = isDesktop
+      ? schoolTranslation[1].desktop
+      : schoolTranslation[1].mobile;
+
+    schoolScene.position.z = isDesktop
+      ? verticalOffset.school.desktop
+      : verticalOffset.school.mobile;
+
+    schoolScene.scale.x = isDesktop
+      ? sceneScale.school.desktop
+      : sceneScale.school.mobile;
+    schoolScene.scale.y = isDesktop
+      ? sceneScale.school.desktop
+      : sceneScale.school.mobile;
+    schoolScene.scale.z = isDesktop
+      ? sceneScale.school.desktop
+      : sceneScale.school.mobile;
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + "school % loaded");
+    console.log("school " + (xhr.loaded / xhr.total) * 100 + "  % loaded");
   },
   (error) => {
     console.log(error);
@@ -126,7 +142,7 @@ loader.load(
 );
 
 loader.load(
-  "../assets/models/office_01.glb",
+  "../assets/models/office_02.glb",
   (gltf) => {
     gltf.scene.traverse(function (child) {
       if ((child as THREE.Mesh).isMesh) {
@@ -145,14 +161,28 @@ loader.load(
     });
     scene.add(gltf.scene);
     officeScene = gltf.scene;
-    officeScene.position.x = officeTranslation[1];
-    officeScene.position.z = 0.2;
-    officeScene.scale.x = 0.85;
-    officeScene.scale.y = 0.85;
-    officeScene.scale.z = 0.85;
+
+    const isDesktop = window.innerWidth >= 768;
+    officeScene.position.x = isDesktop
+      ? officeTranslation[1].desktop
+      : officeTranslation[1].mobile;
+
+    officeScene.position.z = isDesktop
+      ? verticalOffset.office.desktop
+      : verticalOffset.office.mobile;
+
+    officeScene.scale.x = isDesktop
+      ? sceneScale.office.desktop
+      : sceneScale.office.mobile;
+    officeScene.scale.y = isDesktop
+      ? sceneScale.office.desktop
+      : sceneScale.office.mobile;
+    officeScene.scale.z = isDesktop
+      ? sceneScale.office.desktop
+      : sceneScale.office.mobile;
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + "office % loaded");
+    console.log("office " + (xhr.loaded / xhr.total) * 100 + " % loaded");
   },
   (error) => {
     console.log(error);
@@ -160,7 +190,7 @@ loader.load(
 );
 
 loader.load(
-  "../assets/models/camp_site_01.glb",
+  "../assets/models/camp_site_03.glb",
   (gltf) => {
     gltf.scene.traverse(function (child) {
       if ((child as THREE.Mesh).isMesh) {
@@ -179,14 +209,27 @@ loader.load(
     });
     scene.add(gltf.scene);
     campScene = gltf.scene;
-    campScene.position.x = campTranslation[1];
-    campScene.position.z = 0.1;
-    // campScene.scale.x = 0.95;
-    // campScene.scale.y = 0.95;
-    // campScene.scale.z = 0.95;
+    const isDesktop = window.innerWidth >= 768;
+    campScene.position.x = isDesktop
+      ? campTranslation[1].desktop
+      : campTranslation[1].mobile;
+
+    campScene.position.z = isDesktop
+      ? verticalOffset.camp.desktop
+      : verticalOffset.camp.mobile;
+
+    campScene.scale.x = isDesktop
+      ? sceneScale.camp.desktop
+      : sceneScale.camp.mobile;
+    campScene.scale.y = isDesktop
+      ? sceneScale.camp.desktop
+      : sceneScale.camp.mobile;
+    campScene.scale.z = isDesktop
+      ? sceneScale.camp.desktop
+      : sceneScale.camp.mobile;
   },
   (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + "campsite % loaded");
+    console.log("campsite " + (xhr.loaded / xhr.total) * 100 + " % loaded");
   },
   (error) => {
     console.log(error);
@@ -196,23 +239,40 @@ loader.load(
 // End region: geometry
 
 // Region: animation
-window.addEventListener("resize", onWindowResize, false);
-function onWindowResize() {
-  const aspect = window.innerWidth / window.innerHeight;
-  // camera.aspect = window.innerWidth / window.innerHeight;
-  camera.left = (frustumSize * aspect) / -2;
-  camera.right = (frustumSize * aspect) / 2;
-  camera.top = frustumSize / 2;
-  camera.bottom = -frustumSize / 2;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  render();
-}
+
+const scrollDownButtons = document.querySelectorAll(".scroll-button__down");
+const scrollUpButtons = document.querySelectorAll(".scroll-button__up");
+scrollDownButtons?.forEach((button) => {
+  button.addEventListener("click", () => {
+    checkScroll(-1);
+  }),
+    false;
+});
+scrollUpButtons?.forEach((button) => {
+  button.addEventListener("click", () => {
+    checkScroll(1);
+  }),
+    false;
+});
+
+const navLinkOne = document.querySelector(".nav-link__one");
+const navLinkTwo = document.querySelector(".nav-link__two");
+const navLinkThree = document.querySelector(".nav-link__three");
+navLinkOne?.addEventListener("click", () => {
+  checkScroll(0, 1);
+});
+
+navLinkTwo?.addEventListener("click", () => {
+  checkScroll(0, 2);
+});
+
+navLinkThree?.addEventListener("click", () => {
+  checkScroll(0, 3);
+});
 
 let sceneInView = 1;
-// let firstLoad = true;
 
-const checkScroll = (direction: 0 | 1 | -1): void => {
+const checkScroll = (direction: 0 | 1 | -1, goToScene?: number): void => {
   // compare the current scroll position with the last known position
   if (direction === -1) {
     // scroll down
@@ -227,12 +287,19 @@ const checkScroll = (direction: 0 | 1 | -1): void => {
     sceneInView = 1;
   }
 
+  if (goToScene) {
+    sceneInView = goToScene;
+  }
+
+  const isDesktop = window.innerWidth >= 768;
   // scroll to the new scene
   // move school scene
   new TWEEN.Tween(schoolScene.position)
     .to(
       {
-        x: sceneMoveMap[sceneInView].schoolX,
+        x: isDesktop
+          ? sceneMoveMap[sceneInView].schoolX
+          : sceneMoveMap[sceneInView].schoolXMobile,
       },
       1500
     )
@@ -243,7 +310,9 @@ const checkScroll = (direction: 0 | 1 | -1): void => {
   new TWEEN.Tween(officeScene.position)
     .to(
       {
-        x: sceneMoveMap[sceneInView].officeX,
+        x: isDesktop
+          ? sceneMoveMap[sceneInView].officeX
+          : sceneMoveMap[sceneInView].officeXMobile,
       },
       1500
     )
@@ -254,7 +323,9 @@ const checkScroll = (direction: 0 | 1 | -1): void => {
   new TWEEN.Tween(campScene.position)
     .to(
       {
-        x: sceneMoveMap[sceneInView].campX,
+        x: isDesktop
+          ? sceneMoveMap[sceneInView].campX
+          : sceneMoveMap[sceneInView].campXMobile,
       },
       1500
     )
@@ -282,7 +353,12 @@ const checkScroll = (direction: 0 | 1 | -1): void => {
     (sceneMoveMap[key].contentElement as Element).classList.remove(
       `${sceneMoveMap[key].contentClass}--visible`
     );
-    
+    (sceneMoveMap[key].emailLinkElement as Element).classList.remove(
+      `${sceneMoveMap[key].emailLinkClass}--visible`
+    );
+    (sceneMoveMap[key].resumeButtonElement as Element).classList.remove(
+      `${sceneMoveMap[key].resumeButtonClass}--visible`
+    );
   }
 
   (sceneMoveMap[sceneInView].backgroundElement as Element)?.classList.add(
@@ -291,6 +367,14 @@ const checkScroll = (direction: 0 | 1 | -1): void => {
 
   (sceneMoveMap[sceneInView].contentElement as Element)?.classList.add(
     `${sceneMoveMap[sceneInView].contentClass as string}--visible`
+  );
+
+  (sceneMoveMap[sceneInView].emailLinkElement as Element)?.classList.add(
+    `${sceneMoveMap[sceneInView].emailLinkClass as string}--visible`
+  );
+
+  (sceneMoveMap[sceneInView].resumeButtonElement as Element)?.classList.add(
+    `${sceneMoveMap[sceneInView].resumeButtonClass as string}--visible`
   );
 
   if (sceneInView === 1) {
@@ -324,6 +408,56 @@ const handleScroll = (event: any) => {
   checkScroll(direction);
 };
 
+window.addEventListener("resize", onWindowResize, false);
+function onWindowResize() {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 768) {
+    campScene.position.z = verticalOffset.camp.desktop;
+    officeScene.position.z = verticalOffset.office.desktop;
+    schoolScene.position.z = verticalOffset.school.desktop;
+
+    campScene.scale.x = sceneScale.camp.desktop;
+    campScene.scale.y = sceneScale.camp.desktop;
+    campScene.scale.z = sceneScale.camp.desktop;
+
+    officeScene.scale.x = sceneScale.office.desktop;
+    officeScene.scale.y = sceneScale.office.desktop;
+    officeScene.scale.z = sceneScale.office.desktop;
+
+    schoolScene.scale.x = sceneScale.school.desktop;
+    schoolScene.scale.y = sceneScale.school.desktop;
+    schoolScene.scale.z = sceneScale.school.desktop;
+  } else {
+    campScene.position.z = verticalOffset.camp.mobile;
+    officeScene.position.z = verticalOffset.office.mobile;
+    schoolScene.position.z = verticalOffset.school.mobile;
+
+    campScene.scale.x = sceneScale.camp.mobile;
+    campScene.scale.y = sceneScale.camp.mobile;
+    campScene.scale.z = sceneScale.camp.mobile;
+
+    officeScene.scale.x = sceneScale.office.mobile;
+    officeScene.scale.y = sceneScale.office.mobile;
+    officeScene.scale.z = sceneScale.office.mobile;
+
+    schoolScene.scale.x = sceneScale.school.mobile;
+    schoolScene.scale.y = sceneScale.school.mobile;
+    schoolScene.scale.z = sceneScale.school.mobile;
+  }
+  checkScroll(0, sceneInView);
+
+  const aspect = window.innerWidth / window.innerHeight;
+
+  camera.left = (frustumSize * aspect) / -2;
+  camera.right = (frustumSize * aspect) / 2;
+  camera.top = frustumSize / 2;
+  camera.bottom = -frustumSize / 2;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  render();
+}
+
 window?.addEventListener("wheel", debounce(handleScroll, 1000));
 
 checkScroll(0);
@@ -337,7 +471,6 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   TWEEN.update();
-
   const time = clock.getElapsedTime();
 
   // hover animations
