@@ -1,0 +1,358 @@
+/* Config */
+$color-bg: #111;
+$color-particle-camp: #ffeaba;
+$color-particle-office: #fff;
+$color-particle-school: #fff;
+$spacing: 600px;
+$time-0: 20s;
+$time-1: 60s;
+$time-2: 120s;
+$time-3: 180s;
+$time-4: 600s;
+
+/* mixin */
+
+@function particles($max, $color) {
+  $val: 0px 0px $color;
+  @for $i from 1 through $max {
+    $val: #{$val}, random($spacing) + px random($spacing) + px $color;
+  }
+  @return $val;
+}
+
+@mixin particles($max, $color) {
+  box-shadow: particles($max, $color);
+}
+
+/* Styles */
+
+.particle-wrapper {
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    black 25%,
+    transparent 85%
+  );
+  mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s;
+
+  &--visible {
+    opacity: 1;
+    transition: all 0.3s ease-in-out 1s;
+  }
+
+  &__one {
+    grid-column: 8 / span 10;
+    grid-row: 4 / span 7;
+
+    @media (max-width: 768px) {
+      grid-column: 1 / span 17;
+      grid-row: 8 / span 7;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+
+  &__two {
+    grid-column: 3 / span 6;
+    grid-row: 4 / span 7;
+    transform: rotate(0deg) skew(45deg, -45deg);
+
+    @media (max-width: 768px) {
+      grid-column: 1 / span 15;
+      grid-row: 7 / span 9;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+
+  &__three {
+    grid-column: 8 / span 10;
+    grid-row: 4 / span 7;
+
+    @media (max-width: 768px) {
+      grid-column: 1 / span 17;
+      grid-row: 8 / span 7;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+}
+
+.particle,
+.particle:after {
+  background: transparent;
+}
+
+.particle:after {
+  position: absolute;
+  content: "";
+  top: $spacing;
+}
+
+// Region: Office
+
+.particle-1-office {
+  animation: animParticleOffice $time-1 linear infinite;
+  @include particles(50, $color-particle-office);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-1-office:after {
+  @include particles(50, $color-particle-office);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-2-office {
+  animation: animParticleOffice $time-2 linear infinite;
+  @include particles(25, $color-particle-office);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-2-office:after {
+  @include particles(25, $color-particle-office);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-3-office {
+  animation: animParticleOffice $time-3 linear infinite;
+  @include particles(5, $color-particle-office);
+  height: 6px;
+  width: 6px;
+}
+
+.particle-3-office:after {
+  @include particles(5, $color-particle-office);
+  height: 6px;
+  width: 6px;
+}
+
+.particle-4-office {
+  animation: animParticleOffice $time-4 linear infinite;
+  @include particles(25, $color-particle-office);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-4-office:after {
+  @include particles(25, $color-particle-office);
+  height: 2px;
+  width: 2px;
+}
+
+@keyframes animParticleOffice {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY($spacing * -1);
+  }
+}
+
+// End Region: Office
+
+// Region: School
+
+.particle-1-school {
+  animation: animParticleSchool $time-1 ease-in infinite;
+  @include particles(20, $color-particle-school);
+  height: 40px;
+  width: 2px;
+}
+
+.particle-1-school:after {
+  @include particles(20, $color-particle-school);
+  height: 40px;
+  width: 2px;
+}
+
+.particle-2-school {
+  animation: animParticleSchool $time-4 ease-in infinite;
+  @include particles(10, $color-particle-school);
+  height: 60px;
+  width: 3px;
+}
+
+.particle-2-school:after {
+  @include particles(10, $color-particle-school);
+  height: 60px;
+  width: 3px;
+}
+
+.particle-3-school {
+  animation: animParticleSchool $time-3 ease-in infinite;
+  @include particles(5, $color-particle-school);
+  height: 240px;
+  width: 12px;
+}
+
+.particle-3-school:after {
+  @include particles(5, $color-particle-school);
+  height: 240px;
+  width: 12px;
+}
+
+.particle-4-school {
+  animation: animParticleSchool $time-2 ease-in infinite;
+  @include particles(8, $color-particle-school);
+  height: 10px;
+  width: 10px;
+}
+
+.particle-4-school:after {
+  @include particles(8, $color-particle-school);
+  height: 10px;
+  width: 10px;
+}
+
+@keyframes animParticleSchool {
+  from {
+    transform: translateY($spacing * -1);
+  }
+  to {
+    transform: translateY($spacing);
+  }
+}
+
+// End Region: School
+
+// Region: Camp
+$anims: animParticleCamp, animParticleCampReverse, animParticleCamp2,
+  animParticleCampReverse2, animParticleCamp3, animParticleCampReverse3,
+  animParticleCamp4, animParticleCampReverse4;
+
+.particle-1-camp {
+  animation: nth($anims, random(length($anims))) $time-1 linear infinite;
+  @include particles(200, $color-particle-camp);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-1-camp:after {
+  @include particles(200, $color-particle-camp);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-2-camp {
+  animation: nth($anims, random(length($anims))) $time-2 linear infinite;
+  @include particles(50, $color-particle-camp);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-2-camp:after {
+  @include particles(50, $color-particle-camp);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-3-camp {
+  animation: nth($anims, random(length($anims))) $time-3 linear infinite;
+  @include particles(10, $color-particle-camp);
+  height: 6px;
+  width: 6px;
+}
+
+.particle-3-camp:after {
+  @include particles(10, $color-particle-camp);
+  height: 6px;
+  width: 6px;
+}
+
+.particle-4-camp {
+  animation: nth($anims, random(length($anims))) $time-4 linear infinite;
+  @include particles(100, $color-particle-camp);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-4-camp:after {
+  @include particles(100, $color-particle-camp);
+  height: 2px;
+  width: 2px;
+  animation: nth($anims, random(length($anims)));
+}
+
+@keyframes animParticleCamp {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing) translateY($spacing);
+  }
+}
+
+@keyframes animParticleCamp2 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * 0.5) translateY($spacing * 0.5);
+  }
+}
+
+@keyframes animParticleCamp3 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing) translateY($spacing * -1);
+  }
+}
+
+@keyframes animParticleCamp4 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * -1) translateY($spacing);
+  }
+}
+
+@keyframes animParticleCampReverse {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * -1) translateY($spacing * -1);
+  }
+}
+
+@keyframes animParticleCampReverse2 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * -0.5) translateY($spacing * -0.5);
+  }
+}
+
+@keyframes animParticleCampReverse3 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * -0.5) translateY($spacing * 0.5);
+  }
+}
+
+@keyframes animParticleCampReverse4 {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX($spacing * 0.5) translateY($spacing * -0.5);
+  }
+}

@@ -1,10 +1,10 @@
-export const schoolTranslation = {
+export const officeTranslation = {
   1: { desktop: 0.4, mobile: 0 },
   2: { desktop: -9.7, mobile: -10 },
   3: { desktop: -19.7, mobile: -20 },
 };
 
-export const officeTranslation = {
+export const schoolTranslation = {
   1: { desktop: 9.6, mobile: 10 },
   2: { desktop: -0.4, mobile: 0 },
   3: { desktop: -10.4, mobile: -10 },

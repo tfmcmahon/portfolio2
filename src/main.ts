@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import Stats from "three/examples/jsm/libs/stats.module";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 import { TWEEN } from "three/examples/jsm/libs/tween.module.min";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -347,17 +346,20 @@ const checkScroll = (direction: 0 | 1 | -1, goToScene?: number): void => {
 
   // set background based on scene
   for (let key in sceneMoveMap) {
-    (sceneMoveMap[key].backgroundElement as Element).classList.remove(
+    (sceneMoveMap[key].backgroundElement as Element)?.classList.remove(
       `${sceneMoveMap[key].backgroundClass}--visible`
     );
-    (sceneMoveMap[key].contentElement as Element).classList.remove(
+    (sceneMoveMap[key].contentElement as Element)?.classList.remove(
       `${sceneMoveMap[key].contentClass}--visible`
     );
-    (sceneMoveMap[key].emailLinkElement as Element).classList.remove(
+    (sceneMoveMap[key].emailLinkElement as Element)?.classList.remove(
       `${sceneMoveMap[key].emailLinkClass}--visible`
     );
-    (sceneMoveMap[key].resumeButtonElement as Element).classList.remove(
+    (sceneMoveMap[key].resumeButtonElement as Element)?.classList.remove(
       `${sceneMoveMap[key].resumeButtonClass}--visible`
+    );
+    (sceneMoveMap[key].particlesElement as Element)?.classList.remove(
+      `${sceneMoveMap[key].particlesClass}--visible`
     );
   }
 
@@ -375,6 +377,10 @@ const checkScroll = (direction: 0 | 1 | -1, goToScene?: number): void => {
 
   (sceneMoveMap[sceneInView].resumeButtonElement as Element)?.classList.add(
     `${sceneMoveMap[sceneInView].resumeButtonClass as string}--visible`
+  );
+  console.log(sceneMoveMap[sceneInView].particlesElement);
+  (sceneMoveMap[sceneInView].particlesElement as Element)?.classList.add(
+    `${sceneMoveMap[sceneInView].particlesClass as string}--visible`
   );
 
   if (sceneInView === 1) {

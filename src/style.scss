@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Asap:wght@400;600&display=swap");
+@import "./particles.scss";
 
 $family-heading: "Montserrat", sans-serif;
 $family-body: "Asap", sans-serif;
@@ -105,12 +106,12 @@ header {
 
 .background-scene-one {
   @extend %background;
-  background: linear-gradient(#0170bc, #00c5ff, #d6ffd4);
+  background: linear-gradient(#150631 15%, #3e3c88 60%, #537eba 90%, #96dadd);
   height: 100vh;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   width: 100vw;
-  z-index: 1;
+  z-index: 0;
 
   &--visible {
     opacity: 1;
@@ -120,12 +121,12 @@ header {
 
 .background-scene-two {
   @extend %background;
-  background: linear-gradient(#150631 15%, #3e3c88 60%, #537eba 90%, #96dadd);
+  background: linear-gradient(#0170bc, #00c5ff, #d6ffd4);
   height: 100vh;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   width: 100vw;
-  z-index: 0;
+  z-index: 1;
 
   &--visible {
     opacity: 1;
@@ -307,6 +308,10 @@ header {
 
   &__right {
     justify-content: end;
+
+    @media (max-width: $tablet) {
+      justify-content: start;
+    }
   }
 }
 
@@ -505,6 +510,8 @@ header {
   filter: invert(100%);
   position: absolute;
   transform: translateY(-5.125rem) scale(-1);
+  pointer-events: none;
+  z-index: 0;
 
   grid-column: 1 / span 17;
   grid-row: 1 / span 1;
@@ -537,6 +544,22 @@ footer {
 
   &:hover {
     border-bottom: 5px solid $color-white;
+  }
+}
+
+.scroll-text {
+  display: block;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.tap-text {
+  display: none;
+
+  @media screen and (max-width: $tablet) {
+    display: block;
   }
 }
 
@@ -573,7 +596,7 @@ footer {
   gap: 3rem;
   align-items: flex-start;
   margin: 0;
-  padding: 7.14vh 0 0 5.7vw;
+  padding: 7.14vh 0 0;
 }
 
 .nav-link {
@@ -583,7 +606,20 @@ footer {
   text-decoration: none;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
-  padding: 0;
+  padding: 0 0 0 5.7vw;
+}
+
+.nav-separator {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 33%,
+    rgba(255, 255, 255, 0) 0%
+  );
+  background-position: top;
+  background-size: 20px 2px;
+  background-repeat: repeat-x;
+  height: 2px;
+  width: 100%;
 }
 
 .nav-link:hover {
