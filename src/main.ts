@@ -4,7 +4,6 @@ import { TWEEN } from "three/examples/jsm/libs/tween.module.min";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { debounce } from "debounce";
 
-import "./style.scss";
 import { sceneMoveMap } from "./constants/scene-to-move-map";
 import {
   campTranslation,
@@ -13,6 +12,8 @@ import {
   schoolTranslation,
   verticalOffset,
 } from "./constants/scene-translations";
+
+import "./style.scss";
 
 const frustumSize = 1.5;
 const initAspect = window.innerWidth / window.innerHeight;
@@ -378,7 +379,7 @@ const checkScroll = (direction: 0 | 1 | -1, goToScene?: number): void => {
   (sceneMoveMap[sceneInView].resumeButtonElement as Element)?.classList.add(
     `${sceneMoveMap[sceneInView].resumeButtonClass as string}--visible`
   );
-  console.log(sceneMoveMap[sceneInView].particlesElement);
+
   (sceneMoveMap[sceneInView].particlesElement as Element)?.classList.add(
     `${sceneMoveMap[sceneInView].particlesClass as string}--visible`
   );
