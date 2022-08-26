@@ -1,11 +1,5 @@
-// import { defineConfig } from "vite";
-// import laravel from "laravel-vite-plugin";
+import { defineConfig } from "vite";
 
-// export default defineConfig({
-//   plugins: [
-//     laravel({
-//       input: ["src/style.scss"], // add scss file
-//       refresh: true,
-//     }),
-//   ],
-// });
+export default defineConfig({
+  base: "/porfolio2/",
+});
