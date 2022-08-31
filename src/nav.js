@@ -1,7 +1,7 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelectorAll(".nav-link");
 
-navToggle?.addEventListener("click", () => {
+navToggle.addEventListener("click", () => {
   document.body.classList.toggle("nav-open");
 });
 
@@ -12,4 +12,4 @@ navLinks.forEach((link) => {
 });
 
 const fadeIn = document.querySelector(".fade-in");
-fadeIn?.classList.add("fade-in__active");
+fadeIn.classList.add("fade-in__active");
