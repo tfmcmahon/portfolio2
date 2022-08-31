@@ -30915,18 +30915,5 @@ void main() {
       Kn.render(ps, cn);
     };
   nu();
-  const Jo = document.querySelector(".nav-toggle"),
-    xx = document.querySelectorAll(".nav-link");
-  Jo == null ||
-    Jo.addEventListener("click", () => {
-      document.body.classList.toggle("nav-open");
-    });
-  xx.forEach((s) => {
-    s.addEventListener("click", () => {
-      document.body.classList.remove("nav-open");
-    });
-  });
-  const Ko = document.querySelector(".fade-in");
-  Ko == null || Ko.classList.add("fade-in__active");
 });
 export default yx();
