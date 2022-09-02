@@ -56,6 +56,10 @@ $time-4: 600s;
       height: 100%;
       overflow: hidden;
     }
+
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 
   &__two {
@@ -70,6 +74,10 @@ $time-4: 600s;
       height: 100%;
       overflow: hidden;
     }
+
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 
   &__three {
@@ -82,6 +90,10 @@ $time-4: 600s;
       width: 100%;
       height: 100%;
       overflow: hidden;
+    }
+
+    @media (max-width: 480px) {
+      display: none;
     }
   }
 }
